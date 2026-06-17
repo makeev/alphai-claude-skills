@@ -22,10 +22,11 @@ different questions — pick the right one:
 
 1. **Start narrow, with `alphai_actionable_now()`** (defaults: last 6h,
    high-actionability). This is the real "is anything breaking" signal.
-2. **Read an empty result correctly.** Outside US market hours (nights,
-   weekends) an empty list is *expected* — it means no high-actionability prints
-   in the window, **not** that the tool failed. Before concluding "nothing
-   happened", widen once: `alphai_actionable_now(hours=24, min_actionability='medium')`.
+2. **Read an empty result correctly.** Outside major market hours (nights,
+   weekends — crypto trades 24/7, but high-actionability prints still cluster in
+   US/European/Asian sessions) an empty list is *expected* — it means no
+   high-actionability prints in the window, **not** that the tool failed. Before
+   concluding "nothing happened", widen once: `alphai_actionable_now(hours=24, min_actionability='medium')`.
 3. **Add the backdrop with `alphai_trending(limit=10)`.** Use this for the
    "bigger stories shaping the week" layer even when nothing is breaking.
 4. **Optional focus.** If the user named a sector or theme, follow up with

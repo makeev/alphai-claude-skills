@@ -76,10 +76,11 @@ you edit one. Don't invent tools or params — if unsure, check
   reprints into one row with a `sources_count` corroboration signal.
 - **Actionable ≠ trending.** `alphai_actionable_now` = act-today; `alphai_trending`
   = biggest stories of the last 48h. Don't upgrade a trending item to "breaking".
-- **An empty result is a valid answer.** Outside US market hours,
-  `alphai_actionable_now` returning `[]` is expected — widen `hours` /
-  `min_actionability` once before concluding nothing happened. Don't pad a thin
-  feed with speculation.
+- **An empty result is a valid answer.** Outside major market hours (nights,
+  weekends — crypto trades 24/7, but high-actionability prints still cluster in
+  US/European/Asian sessions), `alphai_actionable_now` returning `[]` is expected
+  — widen `hours` / `min_actionability` once before concluding nothing happened.
+  Don't pad a thin feed with speculation.
 - **Insider nuance.** Report the *event*, not a count of tranches; an insider sale
   isn't automatically bearish (taxes, scheduled 10b5-1, option exercises).
 
