@@ -21,7 +21,7 @@ resets the other's setup. `alphai_pair_analysis` is built for exactly this.
 2. **Run the comparison.** Call `alphai_pair_analysis(ticker_a, ticker_b)`. It
    returns three things: news naming **both** companies (the shared read-across),
    plus each ticker's **own** recent news for context.
-3. **Tighten on request.** Raise `min_relevance` (default 6) for only the
+3. **Tighten on request.** Raise `min_relevance` (default 4) for only the
    strongest items, or `limit` for more rows per list.
 
 ## Output

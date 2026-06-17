@@ -77,13 +77,13 @@ All 11 tools the skills can reach (full schemas at
 | `alphai_insider_news` | SEC Form 4 + 13F ownership-change news. |
 | `alphai_pair_analysis` | News naming two tickers, plus each one's own recent news. |
 | `alphai_article` | One article by `uid`, with full enrichment. |
-| `alphai_tickers` | List/search supported stock & ETF tickers. |
+| `alphai_tickers` | List/search supported tickers — US stocks, ETFs, crypto & foreign listings. |
 | `alphai_alerts_list` | Your active alert subscriptions *(Basic/Pro)*. |
 | `alphai_alerts_subscribe` | Add/update a ticker alert *(Basic/Pro)*. |
 | `alphai_alerts_unsubscribe` | Disable a ticker alert *(Basic/Pro)*. |
 
 **Relevance score** is the enricher's 1–10 rating of how much a story matters for
-its tickers; most tools default to a floor of 6. **Categories** (14): `earnings`,
+its tickers; most tools default to a floor of 4. **Categories** (14): `earnings`,
 `mergers_acquisitions`, `regulation`, `macro_economy`, `sector_analysis`,
 `market_movers`, `technology`, `commodities`, `crypto`, `ipo`, `geopolitics`,
 `insider`, `corporate_actions`, `other`.

@@ -44,12 +44,12 @@ you edit one. Don't invent tools or params — if unsure, check
 
 | Tool | Key params (defaults) |
 |---|---|
-| `alphai_news_search` | `q?`, `tickers?`, `category?`, `from_date?`, `to_date?`, `min_relevance=6`, `page_size=10`, `cursor?`, `collapse_stories=false` |
+| `alphai_news_search` | `q?`, `tickers?`, `category?`, `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `collapse_stories=false` |
 | `alphai_ticker_news` | `ticker`, `include_insider=true`, `page_size=10`, `cursor?`, `collapse_stories=false` |
 | `alphai_trending` | `limit=10`, `min_relevance=8`, `dedupe=true` |
 | `alphai_actionable_now` | `limit=10`, `hours=6`, `min_novelty=7`, `min_actionability="high"\|"medium"`, `dedupe=true` |
-| `alphai_insider_news` | `ticker?`, `from_date?`, `to_date?`, `min_relevance=6`, `page_size=10`, `cursor?` |
-| `alphai_pair_analysis` | `ticker_a`, `ticker_b`, `min_relevance=6`, `limit=5` |
+| `alphai_insider_news` | `ticker?`, `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?` |
+| `alphai_pair_analysis` | `ticker_a`, `ticker_b`, `min_relevance=4`, `limit=5` |
 | `alphai_article` | `uid` |
 | `alphai_tickers` | `q?`, `sector?`, `limit=100`, `offset=0` |
 | `alphai_alerts_list` | — *(Basic/Pro)* |
@@ -57,7 +57,7 @@ you edit one. Don't invent tools or params — if unsure, check
 | `alphai_alerts_unsubscribe` | `ticker` *(Basic/Pro)* |
 
 - **`relevance_score`** is a 1–10 rating of how much a story matters for its
-  tickers; most tools floor at 6.
+  tickers; most tools floor at 4 (`alphai_trending` floors at 8).
 - **Categories (14):** `earnings`, `mergers_acquisitions`, `regulation`,
   `macro_economy`, `sector_analysis`, `market_movers`, `technology`,
   `commodities`, `crypto`, `ipo`, `geopolitics`, `insider`, `corporate_actions`,
