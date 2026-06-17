@@ -31,7 +31,7 @@ claude mcp add --transport http alphai https://mcp.alphai.io/mcp
 ```
 
 The first tool call opens a browser for OAuth 2.1 (no API key to paste). It's
-**read-only news data** on the Free tier (100 calls/hour, no card); only the
+**read-only news data** on the Free tier (100 calls/day, 20/min burst — no card); only the
 `alphai_alerts_*` tools mutate state, and only the caller's own subscriptions.
 If the `alphai_*` tools aren't in the tool list, stop and tell the user to run
 the command above before continuing.

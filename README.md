@@ -29,7 +29,7 @@ key to paste):
 claude mcp add --transport http alphai https://mcp.alphai.io/mcp
 ```
 
-The **Free** tier is 100 tool calls/hour with no card. The MCP is read-only news
+The **Free** tier is 100 tool calls/day (20/min burst) with no card. The MCP is read-only news
 data; nothing here places trades or touches your account beyond your own alert
 subscriptions. See [alphai.io/mcp](https://alphai.io/mcp) for other clients
 (Claude Desktop, Cursor, VS Code, Gemini, …).
