@@ -92,6 +92,7 @@ its tickers; most tools default to a floor of 4. **Categories** (14): `earnings`
 
 - MCP setup & playground — <https://alphai.io/mcp>
 - AlphaAI MCP on Glama — <https://glama.ai/mcp/servers/makeev/alphai-mcp>
+- AlphaAI MCP on mcp.so — <https://mcp.so/server/alphai-news/makeev>
 - REST API & SDKs — <https://alphai.io/developers>
 - Changelog — <https://alphai.io/changelog>
 
