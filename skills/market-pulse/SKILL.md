@@ -29,8 +29,10 @@ different questions — pick the right one:
    concluding "nothing happened", widen once: `alphai_actionable_now(hours=24, min_actionability='medium')`.
 3. **Add the backdrop with `alphai_trending(limit=10)`.** Use this for the
    "bigger stories shaping the week" layer even when nothing is breaking.
-4. **Optional focus.** If the user named a sector or theme, follow up with
-   `alphai_news_search(q=..., min_relevance=7)` to pull the matching thread.
+4. **Optional focus.** If the user named a sector or theme, resolve it to
+   tickers (`alphai_tickers(q=...)` or your own knowledge), then
+   `alphai_news_search(tickers=[...], min_relevance=7)` — there is no free-text
+   news search; match themes client-side on the returned titles/summaries.
 
 ## Output
 
