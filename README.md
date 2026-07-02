@@ -70,7 +70,7 @@ All 11 tools the skills can reach (full schemas at
 
 | Tool | What it returns |
 |---|---|
-| `alphai_news_search` | Filter the enriched feed (tickers, category, insider, dates, `min_relevance`) — no free-text query. |
+| `alphai_news_search` | Filter the enriched feed (tickers, category, dates, `min_relevance`) — no free-text query. |
 | `alphai_ticker_news` | Latest news for one ticker (insider included by default). |
 | `alphai_trending` | Top news from the last 48h ranked by relevance. |
 | `alphai_actionable_now` | Breaking, decision-grade news from the last few hours. |

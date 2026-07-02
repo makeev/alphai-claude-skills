@@ -44,7 +44,7 @@ you edit one. Don't invent tools or params — if unsure, check
 
 | Tool | Key params (defaults) |
 |---|---|
-| `alphai_news_search` | `tickers?`, `category?`, `insider?`, `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `collapse_stories=false` (free-text `q` removed 2026-07-02) |
+| `alphai_news_search` | `tickers?`, `category?`, `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `collapse_stories=false` (free-text `q` removed 2026-07-02) |
 | `alphai_ticker_news` | `ticker`, `include_insider=true`, `page_size=10`, `cursor?`, `collapse_stories=false` |
 | `alphai_trending` | `limit=10`, `min_relevance=8`, `dedupe=true` |
 | `alphai_actionable_now` | `limit=10`, `hours=6`, `min_novelty=7`, `min_actionability="high"\|"medium"`, `dedupe=true` |
