@@ -1,10 +1,6 @@
 ---
 name: market-pulse
-description: >-
-  Summarize what's moving in the market right now using the AlphaAI MCP. Use when
-  the user asks "what's moving?", "what's the big story today?", "anything
-  breaking?", "market pulse", or wants a fast read on the current tape rather than
-  one specific ticker.
+description: Summarize what's moving in the market right now using the AlphaAI MCP. Use when the user asks "what's moving?", "what's the big story today?", "anything breaking?", "market pulse", or wants a fast read on the current tape rather than one specific ticker.
 ---
 
 # Market pulse

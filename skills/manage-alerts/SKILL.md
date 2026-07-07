@@ -1,11 +1,6 @@
 ---
 name: manage-alerts
-description: >-
-  List, add, or remove the user's ticker news-alert subscriptions through the
-  AlphaAI MCP. Use when the user asks to "alert me on <ticker>", "subscribe me to
-  <ticker> earnings news", "what alerts do I have?", "stop alerts for <ticker>",
-  or to manage their AlphaAI alert inventory. Requires a paid (Basic/Pro) AlphaAI
-  plan.
+description: List, add, or remove the user's ticker news-alert subscriptions through the AlphaAI MCP. Use when the user asks to "alert me on <ticker>", "subscribe me to <ticker> earnings news", "what alerts do I have?", "stop alerts for <ticker>", or to manage their AlphaAI alert inventory. Requires a paid (Basic/Pro) AlphaAI plan.
 ---
 
 # Manage alerts

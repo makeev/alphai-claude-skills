@@ -1,10 +1,6 @@
 ---
 name: stock-brief
-description: >-
-  Produce a situational brief on a single stock/ticker — its recent
-  high-relevance news, insider activity, and what to watch next — using the
-  AlphaAI MCP. Use when the user asks to "brief me on <ticker>", "what's going on
-  with <company>", "catch me up on NVDA", or wants a quick read on one name.
+description: Produce a situational brief on a single stock/ticker — its recent high-relevance news, insider activity, and what to watch next — using the AlphaAI MCP. Use when the user asks to "brief me on <ticker>", "what's going on with <company>", "catch me up on NVDA", or wants a quick read on one name.
 ---
 
 # Stock brief

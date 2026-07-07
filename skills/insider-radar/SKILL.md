@@ -1,10 +1,6 @@
 ---
 name: insider-radar
-description: >-
-  Scan SEC Form 4 insider trades and 13F ownership moves for a ticker or a
-  watchlist using the AlphaAI MCP. Use when the user asks about "insider buying",
-  "insider selling", "Form 4 activity", "who's buying <ticker>", "institutional
-  ownership changes", or wants an insider-activity sweep.
+description: Scan SEC Form 4 insider trades and 13F ownership moves for a ticker or a watchlist using the AlphaAI MCP. Use when the user asks about "insider buying", "insider selling", "Form 4 activity", "who's buying <ticker>", "institutional ownership changes", or wants an insider-activity sweep.
 ---
 
 # Insider radar

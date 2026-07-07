@@ -1,10 +1,6 @@
 ---
 name: peer-readacross
-description: >-
-  Compare two tickers and surface the cross-read between them using the AlphaAI
-  MCP. Use when the user asks to "compare X and Y", "NVDA vs AMD", "what does
-  <peer>'s news mean for <ticker>", or wants the read-across between two related
-  names (competitors, supplier/customer, same theme).
+description: Compare two tickers and surface the cross-read between them using the AlphaAI MCP. Use when the user asks to "compare X and Y", "NVDA vs AMD", "what does <peer>'s news mean for <ticker>", or wants the read-across between two related names (competitors, supplier/customer, same theme).
 ---
 
 # Peer read-across
