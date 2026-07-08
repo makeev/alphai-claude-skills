@@ -22,8 +22,8 @@ instead of a raw tool dump.
 
 ## 1. Connect the alphai MCP to Claude Code
 
-One line — the first tool call opens your browser to authorize (OAuth 2.1, no API
-key to paste):
+One line — Claude Code prompts for OAuth on connect and opens your browser to
+authorize (OAuth 2.1, no API key to paste; re-authenticate any time with `/mcp`):
 
 ```bash
 claude mcp add --transport http alphai https://mcp.alphai.io/mcp
