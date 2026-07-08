@@ -29,6 +29,15 @@ authorize (OAuth 2.1, no API key to paste; re-authenticate any time with `/mcp`)
 claude mcp add --transport http alphai https://mcp.alphai.io/mcp
 ```
 
+Headless box (no browser)? Use an alphai API key from
+[alphai.io/account](https://alphai.io/account) as a static Bearer header
+instead:
+
+```bash
+claude mcp add --transport http alphai https://mcp.alphai.io/mcp \
+  --header "Authorization: Bearer ak_live_YOUR_KEY"
+```
+
 The **Free** tier is 100 tool calls/day (20/min burst) with no card. The MCP is read-only news
 data; nothing here places trades or touches your account beyond your own alert
 subscriptions. See [alphai.io/mcp](https://alphai.io/mcp) for other clients
