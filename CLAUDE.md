@@ -15,7 +15,7 @@ README.md                human onboarding: connect the MCP, install the skills
 
 | Skill | Fires when the user wants… | Primary tools |
 |---|---|---|
-| `stock-brief` | a situational brief on one ticker | `alphai_ticker_news`, `alphai_trending`, `alphai_article` |
+| `stock-brief` | a situational brief on one ticker | `alphai_ticker_news`, `alphai_earnings`, `alphai_trending`, `alphai_article` |
 | `market-pulse` | "what's moving right now / today?" | `alphai_actionable_now`, `alphai_trending` |
 | `insider-radar` | an insider buying/selling scan | `alphai_insider_news` |
 | `peer-readacross` | a two-ticker comparison / read-across | `alphai_pair_analysis` |
@@ -51,7 +51,10 @@ you edit one. Don't invent tools or params — if unsure, check
 | `alphai_insider_news` | `ticker?`, `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?` |
 | `alphai_pair_analysis` | `ticker_a`, `ticker_b`, `min_relevance=4`, `limit=5` |
 | `alphai_article` | `uid` |
-| `alphai_tickers` | `q?`, `sector?`, `limit=100`, `offset=0` |
+| `alphai_earnings` | `ticker` |
+| `alphai_calendar` | `days_ahead=7`, `days_back=0`, `importance?`, `event_keys?` |
+| `alphai_macro` | `limit=10`, `hours=24`, `min_relevance=4`, `categories?`, `dedupe=true` |
+| `alphai_tickers` | `q?`, `sector?`, `limit=100`, `offset=0` — returns `next_report_date` (company-confirmed, never an estimate) |
 | `alphai_alerts_list` | — *(Basic/Pro)* |
 | `alphai_alerts_subscribe` | `ticker`, `category_filter?`, `min_relevance_score?` *(Basic/Pro)* |
 | `alphai_alerts_unsubscribe` | `ticker` *(Basic/Pro)* |

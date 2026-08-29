@@ -2,8 +2,8 @@
 
 Ready-to-use [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 **skills** for the [AlphaAI](https://alphai.io) MCP server — relevance-scored,
-ticker-linked financial news plus SEC Form 4 / 13F insider data, straight inside
-your agent.
+ticker-linked financial news, SEC Form 4 / 13F insider data, and filing-verified
+earnings reads, straight inside your agent.
 
 Each skill is a small `SKILL.md` that teaches Claude *when* and *how* to call the
 alphai MCP tools for a concrete finance workflow — so you can just ask
@@ -12,7 +12,7 @@ instead of a raw tool dump.
 
 | Skill | Use it when you want… | Tools it leans on |
 |---|---|---|
-| **stock-brief** | A situational brief on one ticker — top news, insider activity, what to watch | `alphai_ticker_news`, `alphai_trending`, `alphai_article` |
+| **stock-brief** | A situational brief on one ticker — top news, earnings read, insider activity, what to watch | `alphai_ticker_news`, `alphai_earnings`, `alphai_trending`, `alphai_article` |
 | **market-pulse** | "What's moving *right now* / today?" across the market | `alphai_actionable_now`, `alphai_trending` |
 | **insider-radar** | A scan of insider buying/selling for a ticker or watchlist | `alphai_insider_news` |
 | **peer-readacross** | A two-ticker comparison and cross-read (e.g. NVDA vs AMD) | `alphai_pair_analysis` |
@@ -74,7 +74,7 @@ right one:
 
 ## Tool reference
 
-All 11 tools the skills can reach (full schemas at
+All 14 tools the skills can reach (full schemas at
 [alphai.io/mcp](https://alphai.io/mcp)):
 
 | Tool | What it returns |
@@ -85,8 +85,11 @@ All 11 tools the skills can reach (full schemas at
 | `alphai_actionable_now` | Breaking, decision-grade news from the last few hours. |
 | `alphai_insider_news` | SEC Form 4 + 13F ownership-change news. |
 | `alphai_pair_analysis` | News naming two tickers, plus each one's own recent news. |
-| `alphai_article` | One article by `uid`, with full enrichment. |
-| `alphai_tickers` | List/search supported tickers — US stocks, ETFs, crypto & foreign listings. |
+| `alphai_article` | One article by `uid`, with full enrichment (adds a structured `earnings` read on SEC filings). |
+| `alphai_earnings` | AlphaAI's filing-verified earnings reads per ticker, plus the next report date. |
+| `alphai_calendar` | Scheduled US macro releases (CPI, FOMC, jobless claims) with the coverage that followed. |
+| `alphai_macro` | Macro-economy feed — prints, central banks, rates, FX, commodities. |
+| `alphai_tickers` | List/search supported tickers — US stocks, ETFs, crypto & foreign listings, incl. `next_report_date`. |
 | `alphai_alerts_list` | Your active alert subscriptions *(Basic/Pro)*. |
 | `alphai_alerts_subscribe` | Add/update a ticker alert *(Basic/Pro)*. |
 | `alphai_alerts_unsubscribe` | Disable a ticker alert *(Basic/Pro)*. |
