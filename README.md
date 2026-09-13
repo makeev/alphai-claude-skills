@@ -1,7 +1,7 @@
 # alphai-claude-skills
 
 Ready-to-use [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
-**skills** for the [AlphaAI](https://alphai.io) MCP server — relevance-scored,
+**skills** for the [AlphAI](https://alphai.io) MCP server — relevance-scored,
 ticker-linked financial news, SEC Form 4 / 13F insider data, and filing-verified
 earnings reads, straight inside your agent.
 
@@ -86,7 +86,7 @@ All 14 tools the skills can reach (full schemas at
 | `alphai_insider_news` | SEC Form 4 + 13F ownership-change news. |
 | `alphai_pair_analysis` | News naming two tickers, plus each one's own recent news. |
 | `alphai_article` | One article by `uid`, with full enrichment (adds a structured `earnings` read on SEC filings). |
-| `alphai_earnings` | AlphaAI's filing-verified earnings reads per ticker, plus the next report date. |
+| `alphai_earnings` | AlphAI's filing-verified earnings reads per ticker, plus the next report date. |
 | `alphai_calendar` | Scheduled US macro releases (CPI, FOMC, jobless claims) with the coverage that followed. |
 | `alphai_macro` | Macro-economy feed — prints, central banks, rates, FX, commodities. |
 | `alphai_tickers` | List/search supported tickers — US stocks, ETFs, crypto & foreign listings, incl. `next_report_date`. |
@@ -103,8 +103,8 @@ its tickers; most tools default to a floor of 4. **Categories** (14): `earnings`
 ## Links
 
 - MCP setup & playground — <https://alphai.io/mcp>
-- AlphaAI MCP on Glama — <https://glama.ai/mcp/connectors/io.github.makeev/alphai-mcp>
-- AlphaAI MCP on mcp.so — <https://mcp.so/server/alphai-news/makeev>
+- AlphAI MCP on Glama — <https://glama.ai/mcp/connectors/io.github.makeev/alphai-mcp>
+- AlphAI MCP on mcp.so — <https://mcp.so/server/alphai-news/makeev>
 - REST API & SDKs — <https://alphai.io/developers>
 - Changelog — <https://alphai.io/changelog>
 

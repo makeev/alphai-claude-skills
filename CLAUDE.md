@@ -1,7 +1,7 @@
-# CLAUDE.md — working with the AlphaAI MCP skills
+# CLAUDE.md — working with the AlphAI MCP skills
 
 This repo is a collection of [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
-**skills** that drive the [AlphaAI](https://alphai.io) MCP server for
+**skills** that drive the [AlphAI](https://alphai.io) MCP server for
 financial-news workflows. This file orients an agent working **in** this repo
 (editing or adding skills) and **with** these skills (running them). Human setup
 lives in [README.md](./README.md); this is the agent-facing companion.
@@ -21,7 +21,7 @@ README.md                human onboarding: connect the MCP, install the skills
 | `peer-readacross` | a two-ticker comparison / read-across | `alphai_pair_analysis` |
 | `manage-alerts` | to list/add/remove alert subscriptions *(Basic/Pro)* | `alphai_alerts_*` |
 
-## Prerequisite: the AlphaAI MCP must be connected
+## Prerequisite: the AlphAI MCP must be connected
 
 These skills are thin orchestration over MCP tools — they do nothing without the
 server connected:

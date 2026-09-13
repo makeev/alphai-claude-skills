@@ -1,11 +1,11 @@
 ---
 name: stock-brief
-description: Produce a situational brief on a single stock/ticker — its recent high-relevance news, earnings reads, insider activity, and what to watch next — using the AlphaAI MCP. Use when the user asks to "brief me on <ticker>", "what's going on with <company>", "catch me up on NVDA", or wants a quick read on one name.
+description: Produce a situational brief on a single stock/ticker — its recent high-relevance news, earnings reads, insider activity, and what to watch next — using the AlphAI MCP. Use when the user asks to "brief me on <ticker>", "what's going on with <company>", "catch me up on NVDA", or wants a quick read on one name.
 ---
 
 # Stock brief
 
-Give a tight, decision-useful read on **one ticker** from AlphaAI's enriched
+Give a tight, decision-useful read on **one ticker** from AlphAI's enriched
 feed. Not a price quote — a *news* brief: what's been happening, what the last
 earnings filing actually said, who's buying or selling, and what to keep an eye
 on.
@@ -19,7 +19,7 @@ on.
    `collapse_stories` folds syndicated reprints into one row each and adds a
    `sources_count` corroboration signal — prefer it for a clean brief. Insider
    news is included by default; keep it.
-3. **Earnings read.** Call `alphai_earnings(ticker)` for AlphaAI's own
+3. **Earnings read.** Call `alphai_earnings(ticker)` for AlphAI's own
    filing-verified reads (8-K item 2.02 / 6-K earnings release, every figure
    checked against the filing). The feed tools return articles *about* a
    quarter; this returns the filing's numbers. An empty `reports` list is a
@@ -44,7 +44,7 @@ Keep it to a screen. Structure:
   "why it matters". Lead with the highest `relevance_score`.
 - **Earnings** — the newest `alphai_earnings` read if there is one: period ·
   verdict · 1–2 metrics · guidance line. Otherwise one line ("no published
-  AlphaAI earnings read yet").
+  AlphAI earnings read yet").
 - **Insider activity** — any Form 4 / 13F rows from the feed: who, buy or sell,
   size if given. "No notable insider activity in the window" is a valid line.
 - **Watch next** — 1–2 concrete things that would change the picture, incl. the
