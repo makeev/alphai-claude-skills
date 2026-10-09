@@ -16,7 +16,7 @@ README.md                human onboarding: connect the MCP, install the skills
 | Skill | Fires when the user wants… | Primary tools |
 |---|---|---|
 | `stock-brief` | a situational brief on one ticker | `alphai_ticker_news`, `alphai_earnings`, `alphai_trending`, `alphai_article` |
-| `market-pulse` | "what's moving right now / today?" | `alphai_actionable_now`, `alphai_trending` |
+| `market-pulse` | "what's moving right now / today?" | `alphai_actionable_now`, `alphai_stories`, `alphai_trending` |
 | `insider-radar` | an insider buying/selling scan (SEC Form 4) | `alphai_insider_news`, `alphai_insider_clusters` |
 | `peer-readacross` | a two-ticker comparison / read-across | `alphai_pair_analysis` |
 | `manage-alerts` | to list/add/remove alert subscriptions *(Basic/Pro)* | `alphai_alerts_*` |
@@ -47,6 +47,8 @@ you edit one. Don't invent tools or params — if unsure, check
 | `alphai_news_search` | `query?` (alias `q`; full text over titles, entities, summaries — read `query_interpretation`), `tickers?`, `category?`, `source_type?`, `item?`, `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `sort="published"\|"ingested"`, `collapse_stories=false` |
 | `alphai_ticker_news` | `ticker`, `include_insider=true`, `page_size=10`, `cursor?`, `collapse_stories=false` |
 | `alphai_trending` | `limit=10`, `min_relevance=8`, `dedupe=true` |
+| `alphai_stories` | `list="top"\|"latest"`, `limit=10`, `cursor?` (latest only) — Stories with two or more publishers, summarised; `summary_state` published / stale / preparing |
+| `alphai_story` | `story_id`, `materials_limit=20` — lookup `status` found / merged (`redirect_to`) / not_a_story (`article`), plus `materials` |
 | `alphai_actionable_now` | `limit=10`, `hours=6`, `min_novelty=7`, `min_actionability="high"\|"medium"`, `dedupe=true` |
 | `alphai_insider_news` | `ticker?`, `is_10b5_1?` (false = discretionary only), `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `sort="published"\|"ingested"` — SEC Form 4 only |
 | `alphai_insider_clusters` | `symbol?`, `days=30` (Free 30, Basic/Pro 90), `min_buyers=2`, `pattern="open_market"`, `sort="recent"\|"buyers"\|"value"`, `min_usd?`, `limit=10`, `cursor?` |

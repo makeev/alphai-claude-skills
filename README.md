@@ -13,7 +13,7 @@ instead of a raw tool dump.
 | Skill | Use it when you want… | Tools it leans on |
 |---|---|---|
 | **stock-brief** | A situational brief on one ticker — top news, earnings read, insider activity, what to watch | `alphai_ticker_news`, `alphai_earnings`, `alphai_trending`, `alphai_article` |
-| **market-pulse** | "What's moving *right now* / today?" across the market | `alphai_actionable_now`, `alphai_trending`, `alphai_news_search` |
+| **market-pulse** | "What's moving *right now* / today?" across the market | `alphai_actionable_now`, `alphai_stories`, `alphai_trending`, `alphai_news_search` |
 | **insider-radar** | A scan of insider buying/selling (SEC Form 4) for a ticker, a watchlist or the market | `alphai_insider_news`, `alphai_insider_clusters` |
 | **peer-readacross** | A two-ticker comparison and cross-read (e.g. NVDA vs AMD) | `alphai_pair_analysis` |
 | **manage-alerts** | To list / add / remove ticker news-alert subscriptions | `alphai_alerts_*` *(Basic/Pro)* |
@@ -74,14 +74,16 @@ right one:
 
 ## Tool reference
 
-All 17 tools the skills can reach (full schemas at
+All 19 tools the skills can reach (full schemas at
 [alphai.io/mcp](https://alphai.io/mcp)):
 
 | Tool | What it returns |
 |---|---|
 | `alphai_news_search` | Full-text `query` over titles, entities and summaries, and/or filters (tickers, category, dates, `min_relevance`, `source_type`). |
 | `alphai_ticker_news` | Latest news for one ticker (insider included by default). |
-| `alphai_trending` | Top news from the last 48h ranked by relevance. |
+| `alphai_trending` | Top articles from the last 48h ranked by relevance, reprints collapsed. |
+| `alphai_stories` | Stories — events two or more publishers reported, each summarised from its articles; `list="top"` ranks the last 48h by importance, coverage and freshness, `list="latest"` pages newest-first. |
+| `alphai_story` | One story by `story_id` (the key every news item carries): summary, key facts with their sources, per-ticker read, open questions, and the articles behind it. `not_a_story` means one publisher carried the event. |
 | `alphai_actionable_now` | Breaking, decision-grade news from the last few hours. |
 | `alphai_insider_news` | SEC Form 4 insider trades as news rows with a structured `insider` block; `is_10b5_1=false` keeps discretionary trades only. |
 | `alphai_insider_clusters` | Issuers where several insiders bought on the open market in one run (IPO/PIPE/plan lots filtered out). |

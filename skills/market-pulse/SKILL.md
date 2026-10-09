@@ -5,14 +5,17 @@ description: Summarize what's moving in the market right now using the AlphAI MC
 
 # Market pulse
 
-Answer "what's happening *right now*?" from AlphAI's feed. Two tools cover two
+Answer "what's happening *right now*?" from AlphAI's feed. Three tools cover three
 different questions — pick the right one:
 
 - **`alphai_actionable_now`** — breaking, *decision-grade* news from the last few
   hours. The gate is strict: by default only `actionability='high'` (something to
   act on TODAY — guidance cut, halted trading, breaking M&A, surprise print).
-- **`alphai_trending`** — top stories of the last 48h by relevance. The "big
-  picture", not necessarily urgent.
+- **`alphai_stories`** — the events of the last 48h that two or more publishers
+  reported, each summarised from its articles (title, lead, importance, publisher
+  count). The "big picture" with independent coverage behind it.
+- **`alphai_trending`** — top single articles of the last 48h by relevance. Catches
+  movers only one outlet has covered so far; not necessarily urgent.
 
 ## Steps
 
@@ -23,8 +26,13 @@ different questions — pick the right one:
    US/European/Asian sessions) an empty list is *expected* — it means no
    high-actionability prints in the window, **not** that the tool failed. Before
    concluding "nothing happened", widen once: `alphai_actionable_now(hours=24, min_actionability='medium')`.
-3. **Add the backdrop with `alphai_trending(limit=10)`.** Use this for the
-   "bigger stories shaping the week" layer even when nothing is breaking.
+3. **Add the backdrop with `alphai_stories(list="top", limit=10)`.** Each card is
+   an event with two or more publishers behind it and a summary written from them;
+   `importance` is the feed's 1–10 scale (7 and up), `publishers` says how broad the
+   coverage is. For depth on one event call `alphai_story(story_id)`: key facts
+   with their sources, the per-ticker read, open questions. Then
+   `alphai_trending(limit=10)` for single-outlet movers the stories list does not
+   carry yet.
 4. **Optional focus.** If the user named a sector or theme, search for it:
    `alphai_news_search(query="<theme words>", min_relevance=7, collapse_stories=true)`.
    The query matches titles, named entities and summaries; read
@@ -36,7 +44,9 @@ different questions — pick the right one:
 - **Breaking now** — the high-actionability items, if any. Each: headline ·
   ticker(s) · one clause on the decision it forces. If none, say so in one line
   and note the window you checked.
-- **Big picture** — 3–5 trending stories by relevance, each a one-liner.
+- **Big picture** — 3–5 stories from `alphai_stories`, each a one-liner with its
+  publisher count; add a trending single-outlet item only when it is not already
+  one of them (compare `story_id`).
 - **So what** — one or two sentences tying it together (risk-on/off, a sector in
   focus, an event everyone's positioning around).
 
