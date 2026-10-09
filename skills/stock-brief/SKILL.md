@@ -45,8 +45,9 @@ Keep it to a screen. Structure:
 - **Earnings** — the newest `alphai_earnings` read if there is one: period ·
   verdict · 1–2 metrics · guidance line. Otherwise one line ("no published
   AlphAI earnings read yet").
-- **Insider activity** — any Form 4 / 13F rows from the feed: who, buy or sell,
-  size if given. "No notable insider activity in the window" is a valid line.
+- **Insider activity** — any SEC Form 4 rows from the feed: who, buy or sell,
+  size, and whether a sale ran under a 10b5-1 plan (`insider.is_10b5_1`). "No
+  notable insider activity in the window" is a valid line.
 - **Watch next** — 1–2 concrete things that would change the picture, incl. the
   `next_report_date` when set.
 

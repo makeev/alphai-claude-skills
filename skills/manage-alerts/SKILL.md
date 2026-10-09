@@ -22,7 +22,10 @@ own** account.
    min_relevance_score?)`.
    - This is a **partial update**: omitting a field on an *existing* subscription
      preserves its current value. A brand-new subscription defaults
-     `min_relevance_score` to 6.
+     `min_relevance_score` to 7. The threshold applies to email and Telegram
+     delivery; a Pro webhook receives every matched story and filters on its own.
+   - Crypto alerts use the `<SYM>-USD` ticker (`BTC-USD`); bare `BTC` is a
+     stock/ETF symbol, and the response's `note` says so.
    - `category_filter` is an optional whitelist from the 14 categories (e.g.
      `["earnings", "insider"]`) — only those categories trigger the alert.
    - Confirm the ticker is real first if unsure (`alphai_tickers`); the tool

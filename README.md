@@ -2,7 +2,7 @@
 
 Ready-to-use [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 **skills** for the [AlphAI](https://alphai.io) MCP server — relevance-scored,
-ticker-linked financial news, SEC Form 4 / 13F insider data, and filing-verified
+ticker-linked financial news, SEC Form 4 insider trades, and filing-verified
 earnings reads, straight inside your agent.
 
 Each skill is a small `SKILL.md` that teaches Claude *when* and *how* to call the
@@ -13,8 +13,8 @@ instead of a raw tool dump.
 | Skill | Use it when you want… | Tools it leans on |
 |---|---|---|
 | **stock-brief** | A situational brief on one ticker — top news, earnings read, insider activity, what to watch | `alphai_ticker_news`, `alphai_earnings`, `alphai_trending`, `alphai_article` |
-| **market-pulse** | "What's moving *right now* / today?" across the market | `alphai_actionable_now`, `alphai_trending` |
-| **insider-radar** | A scan of insider buying/selling for a ticker or watchlist | `alphai_insider_news` |
+| **market-pulse** | "What's moving *right now* / today?" across the market | `alphai_actionable_now`, `alphai_trending`, `alphai_news_search` |
+| **insider-radar** | A scan of insider buying/selling (SEC Form 4) for a ticker, a watchlist or the market | `alphai_insider_news`, `alphai_insider_clusters` |
 | **peer-readacross** | A two-ticker comparison and cross-read (e.g. NVDA vs AMD) | `alphai_pair_analysis` |
 | **manage-alerts** | To list / add / remove ticker news-alert subscriptions | `alphai_alerts_*` *(Basic/Pro)* |
 
@@ -74,21 +74,24 @@ right one:
 
 ## Tool reference
 
-All 14 tools the skills can reach (full schemas at
+All 17 tools the skills can reach (full schemas at
 [alphai.io/mcp](https://alphai.io/mcp)):
 
 | Tool | What it returns |
 |---|---|
-| `alphai_news_search` | Filter the enriched feed (tickers, category, dates, `min_relevance`) — no free-text query. |
+| `alphai_news_search` | Full-text `query` over titles, entities and summaries, and/or filters (tickers, category, dates, `min_relevance`, `source_type`). |
 | `alphai_ticker_news` | Latest news for one ticker (insider included by default). |
 | `alphai_trending` | Top news from the last 48h ranked by relevance. |
 | `alphai_actionable_now` | Breaking, decision-grade news from the last few hours. |
-| `alphai_insider_news` | SEC Form 4 + 13F ownership-change news. |
+| `alphai_insider_news` | SEC Form 4 insider trades as news rows with a structured `insider` block; `is_10b5_1=false` keeps discretionary trades only. |
+| `alphai_insider_clusters` | Issuers where several insiders bought on the open market in one run (IPO/PIPE/plan lots filtered out). |
 | `alphai_pair_analysis` | News naming two tickers, plus each one's own recent news. |
 | `alphai_article` | One article by `uid`, with full enrichment (adds a structured `earnings` read on SEC filings). |
 | `alphai_earnings` | AlphAI's filing-verified earnings reads per ticker, plus the next report date. |
 | `alphai_calendar` | Scheduled US macro releases (CPI, FOMC, jobless claims) with the coverage that followed. |
 | `alphai_macro` | Macro-economy feed — prints, central banks, rates, FX, commodities. |
+| `alphai_radar` | Rank news activity and tone across the market or your saved watchlist, with SEC context per ticker. |
+| `alphai_watchlist_brief` | Your saved watchlist in one read: news grouped by story, SEC filings, next earnings dates. |
 | `alphai_tickers` | List/search supported tickers — US stocks, ETFs, crypto & foreign listings, incl. `next_report_date`. |
 | `alphai_alerts_list` | Your active alert subscriptions *(Basic/Pro)*. |
 | `alphai_alerts_subscribe` | Add/update a ticker alert *(Basic/Pro)*. |

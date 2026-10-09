@@ -17,7 +17,7 @@ README.md                human onboarding: connect the MCP, install the skills
 |---|---|---|
 | `stock-brief` | a situational brief on one ticker | `alphai_ticker_news`, `alphai_earnings`, `alphai_trending`, `alphai_article` |
 | `market-pulse` | "what's moving right now / today?" | `alphai_actionable_now`, `alphai_trending` |
-| `insider-radar` | an insider buying/selling scan | `alphai_insider_news` |
+| `insider-radar` | an insider buying/selling scan (SEC Form 4) | `alphai_insider_news`, `alphai_insider_clusters` |
 | `peer-readacross` | a two-ticker comparison / read-across | `alphai_pair_analysis` |
 | `manage-alerts` | to list/add/remove alert subscriptions *(Basic/Pro)* | `alphai_alerts_*` |
 
@@ -44,16 +44,19 @@ you edit one. Don't invent tools or params — if unsure, check
 
 | Tool | Key params (defaults) |
 |---|---|
-| `alphai_news_search` | `tickers?`, `category?`, `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `collapse_stories=false` (free-text `q` removed 2026-07-02) |
+| `alphai_news_search` | `query?` (alias `q`; full text over titles, entities, summaries — read `query_interpretation`), `tickers?`, `category?`, `source_type?`, `item?`, `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `sort="published"\|"ingested"`, `collapse_stories=false` |
 | `alphai_ticker_news` | `ticker`, `include_insider=true`, `page_size=10`, `cursor?`, `collapse_stories=false` |
 | `alphai_trending` | `limit=10`, `min_relevance=8`, `dedupe=true` |
 | `alphai_actionable_now` | `limit=10`, `hours=6`, `min_novelty=7`, `min_actionability="high"\|"medium"`, `dedupe=true` |
-| `alphai_insider_news` | `ticker?`, `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?` |
+| `alphai_insider_news` | `ticker?`, `is_10b5_1?` (false = discretionary only), `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `sort="published"\|"ingested"` — SEC Form 4 only |
+| `alphai_insider_clusters` | `symbol?`, `days=30` (Free 30, Basic/Pro 90), `min_buyers=2`, `pattern="open_market"`, `sort="recent"\|"buyers"\|"value"`, `min_usd?`, `limit=10`, `cursor?` |
 | `alphai_pair_analysis` | `ticker_a`, `ticker_b`, `min_relevance=4`, `limit=5` |
 | `alphai_article` | `uid` |
 | `alphai_earnings` | `ticker` |
 | `alphai_calendar` | `days_ahead=7`, `days_back=0`, `importance?`, `event_keys?` |
 | `alphai_macro` | `limit=10`, `hours=24`, `min_relevance=4`, `categories?`, `dedupe=true` |
+| `alphai_radar` | `scope="market"\|"watchlist"`, `window="24h"\|"4h"`, `market="all"`, `sentiment="all"`, `sort="score"`, `order="desc"`, `tickers?`, `min_z?`, `limit=20`, `cursor?` |
+| `alphai_watchlist_brief` | `hours=24`, `limit=20` — the caller's saved watchlist |
 | `alphai_tickers` | `q?`, `sector?`, `limit=100`, `offset=0` — returns `next_report_date` (company-confirmed, never an estimate) |
 | `alphai_alerts_list` | — *(Basic/Pro)* |
 | `alphai_alerts_subscribe` | `ticker`, `category_filter?`, `min_relevance_score?` *(Basic/Pro)* |
