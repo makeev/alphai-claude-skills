@@ -44,8 +44,8 @@ you edit one. Don't invent tools or params — if unsure, check
 
 | Tool | Key params (defaults) |
 |---|---|
-| `alphai_news_search` | `query?` (alias `q`; full text over titles, entities, summaries — read `query_interpretation`), `tickers?`, `category?`, `source_type?`, `item?`, `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `sort="published"\|"ingested"`, `collapse_stories=false` |
-| `alphai_ticker_news` | `ticker`, `include_insider=true`, `page_size=10`, `cursor?`, `collapse_stories=false` |
+| `alphai_news_search` | `query?` (alias `q`; full text over titles, entities, summaries — read `query_interpretation`), `tickers?`, `category?`, `source_type?`, `item?`, `event_type?` (corporate event types, OR; not with `query` or `sort="ingested"`), `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `sort="published"\|"ingested"`, `collapse_stories=false` |
+| `alphai_ticker_news` | `ticker`, `include_insider=true`, `event_type?`, `page_size=10`, `cursor?`, `collapse_stories=false` |
 | `alphai_trending` | `limit=10`, `min_relevance=8`, `dedupe=true` |
 | `alphai_stories` | `list="top"\|"latest"`, `limit=10`, `cursor?` (latest only) — Stories with two or more publishers, summarised; `summary_state` published / stale / preparing |
 | `alphai_story` | `story_id`, `materials_limit=20` — lookup `status` found / merged (`redirect_to`) / not_a_story (`article`), plus `materials` |
@@ -70,6 +70,21 @@ you edit one. Don't invent tools or params — if unsure, check
   `macro_economy`, `sector_analysis`, `market_movers`, `technology`,
   `commodities`, `crypto`, `ipo`, `geopolitics`, `insider`, `corporate_actions`,
   `other`.
+- **Corporate events.** Items that come from an SEC 8-K, a 6-K earnings release
+  or a PR Newswire release carry an `event` block in `alphai_news_search`,
+  `alphai_ticker_news` and `alphai_article`: `type`, `role`, `stage`,
+  `counterparty`, `facts` (quoted from the document, each
+  `{name, value, number, number_high, unit, scale}`), `also` (the other events
+  of the same document, with their own facts) and `verified` (false when a
+  quoted fact was not found in the document and was left out, or while the
+  facts are still being read). Press coverage and Form 4 rows have
+  `event: null`.
+- **Event types (17):** `earnings`, `earnings_date`, `exec_change`, `m_and_a`,
+  `offering`, `debt_financing`, `dividend`, `buyback`, `contract_award`,
+  `guidance_update`, `stock_split`, `listing_notice`, `shareholder_vote`,
+  `bankruptcy`, `restructuring`, `clinical_regulatory`, `other`. `event_type`
+  takes a list of them and also matches the types in `event.also`; with
+  `collapse_stories=true` only the item that leads its story is matched.
 - Paginated tools return an opaque `next_cursor`; pass it back as `cursor` for the
   next (older) page. Don't synthesize cursors.
 - `unknown_ticker=true` (or `unknown_tickers`) means the symbol isn't a recognized
@@ -91,6 +106,9 @@ you edit one. Don't invent tools or params — if unsure, check
   Don't pad a thin feed with speculation.
 - **Insider nuance.** Report the *event*, not a count of tranches; an insider sale
   isn't automatically bearish (taxes, scheduled 10b5-1, option exercises).
+- **Event facts come from the document.** Take amounts, dates and names from
+  `event.facts` and `event.also`, not from titles. When `verified` is false, say
+  which detail is missing instead of filling it in.
 
 ## Adding or editing a skill
 

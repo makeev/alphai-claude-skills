@@ -12,7 +12,7 @@ instead of a raw tool dump.
 
 | Skill | Use it when you want… | Tools it leans on |
 |---|---|---|
-| **stock-brief** | A situational brief on one ticker — top news, earnings read, insider activity, what to watch | `alphai_ticker_news`, `alphai_earnings`, `alphai_trending`, `alphai_article` |
+| **stock-brief** | A situational brief on one ticker — top news, earnings read, corporate events, insider activity, what to watch | `alphai_ticker_news`, `alphai_earnings`, `alphai_trending`, `alphai_article` |
 | **market-pulse** | "What's moving *right now* / today?" across the market | `alphai_actionable_now`, `alphai_stories`, `alphai_trending`, `alphai_news_search` |
 | **insider-radar** | A scan of insider buying/selling (SEC Form 4) for a ticker, a watchlist or the market | `alphai_insider_news`, `alphai_insider_clusters` |
 | **peer-readacross** | A two-ticker comparison and cross-read (e.g. NVDA vs AMD) | `alphai_pair_analysis` |
@@ -79,8 +79,8 @@ All 19 tools the skills can reach (full schemas at
 
 | Tool | What it returns |
 |---|---|
-| `alphai_news_search` | Full-text `query` over titles, entities and summaries, and/or filters (tickers, category, dates, `min_relevance`, `source_type`). |
-| `alphai_ticker_news` | Latest news for one ticker (insider included by default). |
+| `alphai_news_search` | Full-text `query` over titles, entities and summaries, and/or filters (tickers, category, dates, `min_relevance`, `source_type`, `event_type`). |
+| `alphai_ticker_news` | Latest news for one ticker (insider included by default); `event_type` keeps corporate events of the given types. |
 | `alphai_trending` | Top articles from the last 48h ranked by relevance, reprints collapsed. |
 | `alphai_stories` | Stories — events two or more publishers reported, each summarised from its articles; `list="top"` ranks the last 48h by importance, coverage and freshness, `list="latest"` pages newest-first. |
 | `alphai_story` | One story by `story_id` (the key every news item carries): summary, key facts with their sources, per-ticker read, open questions, and the articles behind it. `not_a_story` means one publisher carried the event. |
@@ -88,7 +88,7 @@ All 19 tools the skills can reach (full schemas at
 | `alphai_insider_news` | SEC Form 4 insider trades as news rows with a structured `insider` block; `is_10b5_1=false` keeps discretionary trades only. |
 | `alphai_insider_clusters` | Issuers where several insiders bought on the open market in one run (IPO/PIPE/plan lots filtered out). |
 | `alphai_pair_analysis` | News naming two tickers, plus each one's own recent news. |
-| `alphai_article` | One article by `uid`, with full enrichment (adds a structured `earnings` read on SEC filings). |
+| `alphai_article` | One article by `uid`, with full enrichment (adds a structured `earnings` read on SEC filings; an 8-K, a 6-K earnings release or a PR Newswire release also returns its `event` block). |
 | `alphai_earnings` | AlphAI's filing-verified earnings reads per ticker, plus the next report date. |
 | `alphai_calendar` | Scheduled US macro releases (CPI, FOMC, jobless claims) with the coverage that followed. |
 | `alphai_macro` | Macro-economy feed — prints, central banks, rates, FX, commodities. |
@@ -104,6 +104,15 @@ its tickers; most tools default to a floor of 4. **Categories** (14): `earnings`
 `mergers_acquisitions`, `regulation`, `macro_economy`, `sector_analysis`,
 `market_movers`, `technology`, `commodities`, `crypto`, `ipo`, `geopolitics`,
 `insider`, `corporate_actions`, `other`.
+
+**Corporate events:** news items that come from an SEC 8-K, a 6-K earnings
+release or a PR Newswire release carry an `event` block with a `type` (17
+values, such as `m_and_a`, `offering`, `buyback`, `dividend`, `exec_change` and
+`guidance_update`), the company's `role` and `facts` quoted from the document.
+`event_type` on `alphai_news_search` and `alphai_ticker_news` filters by type;
+in `alphai_news_search` it does not combine with `query` or `sort="ingested"`.
+`verified` is false when a quoted fact could not be found in the document and
+was left out. Press coverage and Form 4 rows have no event.
 
 ## Links
 

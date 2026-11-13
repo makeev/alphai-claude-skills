@@ -27,10 +27,23 @@ on.
    `fiscal_period`, `verdict` (strong/solid/mixed/weak), a headline
    `analysis.key_metrics`, guidance; `next_report_date` is company-confirmed
    (never an estimate) and `null` means none held.
-4. **Optional context.** If the user wants the wider tape, call
+4. **Corporate events.** Rows that come from an SEC 8-K, a 6-K earnings release
+   or a PR Newswire release carry an `event` block: a `type`, the company's
+   `role`, and `facts` quoted from the document. Take amounts, dates and names
+   from `event.facts`, not from the title, and read `event.also` too: a
+   dividend, a buyback or new guidance announced inside an earnings release is
+   listed there with its own facts. If the user asks about one kind of event
+   (buybacks, dividends, offerings, M&A, management changes, guidance), filter
+   for it: `alphai_ticker_news(ticker, event_type=["buyback"])`. The types for
+   those questions are `buyback`, `dividend`, `offering` and `debt_financing`,
+   `m_and_a`, `exec_change` and `guidance_update`. Several types are OR-matched,
+   and an event listed in `event.also` counts. Leave `collapse_stories` off on
+   that call, because with it on only the row that leads its story is matched.
+   Press coverage and Form 4 rows have no `event` and never match.
+5. **Optional context.** If the user wants the wider tape, call
    `alphai_trending(limit=5)` and note any market-level story that touches this
    name or its sector.
-5. **Deep-dive on demand.** If one story clearly drives the brief and the user
+6. **Deep-dive on demand.** If one story clearly drives the brief and the user
    wants detail, fetch it with `alphai_article(uid)` for the full enrichment
    (ticker analysis, key entities). The article *body* is not served — work from
    the enrichment and summary.
@@ -41,7 +54,8 @@ Keep it to a screen. Structure:
 
 - **One-line read** — the single most important thing about this name right now.
 - **Top stories** — 3–5 bullets, each: headline · relevance score · one-clause
-  "why it matters". Lead with the highest `relevance_score`.
+  "why it matters". Lead with the highest `relevance_score`. For a row with an
+  `event` block, state the amount, date or counterparty from `event.facts`.
 - **Earnings** — the newest `alphai_earnings` read if there is one: period ·
   verdict · 1–2 metrics · guidance line. Otherwise one line ("no published
   AlphAI earnings read yet").
@@ -57,5 +71,11 @@ Keep it to a screen. Structure:
   the score so the user can calibrate.
 - This is news, not advice. Don't issue buy/sell calls or price targets —
   summarize what the reporting says and let the user decide.
+- Event facts are quotes: for an amount, a date or a name, `value` is the
+  document's own wording, and `number`, `unit` and `scale` are parsed from it.
+  `event.verified` is false when a fact was left out because its quote was not
+  found in the document, or while the facts are still being read. The facts
+  that are present passed the check. Say which detail is missing instead of
+  filling it in from the headline.
 - If the feed is thin, say so plainly rather than padding. A short honest brief
   beats a long speculative one.

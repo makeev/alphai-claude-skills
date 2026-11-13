@@ -38,6 +38,17 @@ different questions — pick the right one:
    The query matches titles, named entities and summaries; read
    `query_interpretation` to see how it was understood. To pin it to companies,
    resolve them with `alphai_tickers(q=...)` and pass `tickers=[...]` as well.
+5. **Optional event focus.** If the user asks about one kind of corporate event
+   across the market (buybacks, dividends, offerings, M&A, management changes,
+   guidance), filter by type instead of searching:
+   `alphai_news_search(event_type=["buyback", "dividend"], from_date="<YYYY-MM-DD>")`.
+   The types for those questions are `buyback`, `dividend`, `offering` and
+   `debt_financing`, `m_and_a`, `exec_change` and `guidance_update`. Several
+   types are OR-matched, and an event listed in `event.also` counts.
+   `event_type` combines with `tickers`, `category` and dates, but not with
+   `query`. Leave `collapse_stories` off here, because with it on only the item
+   that leads its story is matched. Only SEC 8-K filings, 6-K earnings releases
+   and PR Newswire releases carry an `event`, so press coverage never matches.
 
 ## Output
 
@@ -57,4 +68,8 @@ different questions — pick the right one:
   layer each item came from if it matters.
 - Report relevance / actionability honestly; don't upgrade a medium item to
   "breaking".
+- In an event-focus answer, take amounts, dates and names from `event.facts`
+  and `event.also`, not from titles. `event.verified` is false when a fact was
+  left out because its quote was not found in the document, or while the facts
+  are still being read. Say which detail is missing instead of guessing it.
 - News, not advice — no trade calls.
