@@ -50,7 +50,7 @@ you edit one. Don't invent tools or params — if unsure, check
 | `alphai_stories` | `list="top"\|"latest"`, `limit=10`, `cursor?` (latest only) — Stories with two or more publishers, summarised; `summary_state` published / stale / preparing |
 | `alphai_story` | `story_id`, `materials_limit=20` — lookup `status` found / merged (`redirect_to`) / not_a_story (`article`), plus `materials` |
 | `alphai_actionable_now` | `limit=10`, `hours=6`, `min_novelty=7`, `min_actionability="high"\|"medium"`, `dedupe=true` |
-| `alphai_insider_news` | `ticker?`, `is_10b5_1?` (false = discretionary only), `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `sort="published"\|"ingested"` — SEC Form 4 only |
+| `alphai_insider_news` | `ticker?`, `is_10b5_1?` (10b5-1 plan status; false is not the same as chosen), `decision?` (`"discretionary"\|"plan_like"\|"unknown"`, the sale label; matches sales only), `from_date?`, `to_date?`, `min_relevance=4`, `page_size=10`, `cursor?`, `sort="published"\|"ingested"` — SEC Form 4 only |
 | `alphai_insider_clusters` | `symbol?`, `days=30` (Free 30, Basic/Pro 90), `min_buyers=2`, `pattern="open_market"`, `sort="recent"\|"buyers"\|"value"`, `min_usd?`, `limit=10`, `cursor?` |
 | `alphai_pair_analysis` | `ticker_a`, `ticker_b`, `min_relevance=4`, `limit=5` |
 | `alphai_article` | `uid` |
@@ -85,6 +85,29 @@ you edit one. Don't invent tools or params — if unsure, check
   `bankruptcy`, `restructuring`, `clinical_regulatory`, `other`. `event_type`
   takes a list of them and also matches the types in `event.also`; with
   `collapse_stories=true` only the item that leads its story is matched.
+- **Insider sale label.** Every Form 4 sale in the `insider` block of
+  `alphai_insider_news`, and of `alphai_article` on a Form 4 row, carries
+  `decision` and `decision_reason`. `discretionary`: no plan or paperwork in
+  the filing explains the sale, the insider chose to sell. `plan_like`: the
+  sale follows from a 10b5-1 plan or from paperwork, such as shares sold to pay
+  the tax on vesting or to cover an option exercise. `unknown`: the filing does
+  not say enough to tell. Only sales (`transaction_code` `S`) are labelled:
+  purchases, a sale to the issuer (`D`) and other codes carry `decision: null`.
+  An event with several sales is `discretionary` if any of them is, else
+  `unknown` if any of them is, else `plan_like`. The label is read from the
+  whole filing, not only from the 10b5-1 checkbox, so `is_10b5_1=false` still
+  includes tax sales. As a filter, `decision` takes one value. The three values
+  do not overlap: together with the events that hold no sale they add up to the
+  unfiltered feed. The filter combines with `is_10b5_1`, `sort="ingested"` and
+  the dates.
+- **Decision reasons (12):** `plan_10b5_1`, `tax_withholding`,
+  `exercise_cover`, `stated_non_discretionary` with `plan_like`; `open_market`,
+  `exercise_and_sell`, `sold_all_vested` with `discretionary`;
+  `partial_vest_sale`, `cover_ambiguous`, `mixed_acquisitions`,
+  `price_disputed`, `no_lines` with `unknown`. The reason comes from the
+  largest sale that set the label, and it can be `null` next to a label. If
+  every sale carries `decision: null`, the label is unavailable: fall back to
+  `is_10b5_1` and say so.
 - Paginated tools return an opaque `next_cursor`; pass it back as `cursor` for the
   next (older) page. Don't synthesize cursors.
 - `unknown_ticker=true` (or `unknown_tickers`) means the symbol isn't a recognized
@@ -105,7 +128,9 @@ you edit one. Don't invent tools or params — if unsure, check
   — widen `hours` / `min_actionability` once before concluding nothing happened.
   Don't pad a thin feed with speculation.
 - **Insider nuance.** Report the *event*, not a count of tranches; an insider sale
-  isn't automatically bearish (taxes, scheduled 10b5-1, option exercises).
+  isn't automatically bearish (taxes, scheduled 10b5-1, option exercises). Call
+  a sale the insider's choice only when `decision` is `discretionary`;
+  `is_10b5_1=false` alone does not show it.
 - **Event facts come from the document.** Take amounts, dates and names from
   `event.facts` and `event.also`, not from titles. When `verified` is false, say
   which detail is missing instead of filling it in.

@@ -85,7 +85,7 @@ All 19 tools the skills can reach (full schemas at
 | `alphai_stories` | Stories — events two or more publishers reported, each summarised from its articles; `list="top"` ranks the last 48h by importance, coverage and freshness, `list="latest"` pages newest-first. |
 | `alphai_story` | One story by `story_id` (the key every news item carries): summary, key facts with their sources, per-ticker read, open questions, and the articles behind it. `not_a_story` means one publisher carried the event. |
 | `alphai_actionable_now` | Breaking, decision-grade news from the last few hours. |
-| `alphai_insider_news` | SEC Form 4 insider trades as news rows with a structured `insider` block; `is_10b5_1=false` keeps discretionary trades only. |
+| `alphai_insider_news` | SEC Form 4 insider trades as news rows with a structured `insider` block; every sale is labelled `discretionary`, `plan_like` or `unknown`, and `decision="discretionary"` keeps the sales an insider chose to make. |
 | `alphai_insider_clusters` | Issuers where several insiders bought on the open market in one run (IPO/PIPE/plan lots filtered out). |
 | `alphai_pair_analysis` | News naming two tickers, plus each one's own recent news. |
 | `alphai_article` | One article by `uid`, with full enrichment (adds a structured `earnings` read on SEC filings; an 8-K, a 6-K earnings release or a PR Newswire release also returns its `event` block). |
@@ -113,6 +113,17 @@ values, such as `m_and_a`, `offering`, `buyback`, `dividend`, `exec_change` and
 in `alphai_news_search` it does not combine with `query` or `sort="ingested"`.
 `verified` is false when a quoted fact could not be found in the document and
 was left out. Press coverage and Form 4 rows have no event.
+
+**Insider sale label:** every Form 4 sale in the `insider` block carries
+`decision`. It is `discretionary` when no plan or paperwork in the filing
+explains the sale, `plan_like` when the sale follows from a 10b5-1 plan or from
+paperwork, such as shares sold to pay the tax on vesting or to cover an option
+exercise, and `unknown` when the filing does not say enough to tell.
+`decision_reason` names what decided it, for example `tax_withholding` or
+`exercise_cover`. Purchases and other transaction codes carry `null`. The label
+is read from the whole filing, not only from the 10b5-1 checkbox, so
+`is_10b5_1=false` still includes tax sales. To keep only the sales an insider
+chose to make, pass `decision="discretionary"` to `alphai_insider_news`.
 
 ## Links
 

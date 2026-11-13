@@ -60,7 +60,11 @@ Keep it to a screen. Structure:
   verdict · 1–2 metrics · guidance line. Otherwise one line ("no published
   AlphAI earnings read yet").
 - **Insider activity** — any SEC Form 4 rows from the feed: who, buy or sell,
-  size, and whether a sale ran under a 10b5-1 plan (`insider.is_10b5_1`). "No
+  size, and whether a sale ran under a 10b5-1 plan (`insider.is_10b5_1`). A
+  sale outside a plan is not yet a choice: `alphai_insider_news(ticker)` labels
+  each sale in `insider.decision` as `discretionary` (the insider chose to
+  sell), `plan_like` (a 10b5-1 plan, a tax sale on vesting, an exercise cover)
+  or `unknown`, so call a sale chosen only when the label says so. "No
   notable insider activity in the window" is a valid line.
 - **Watch next** — 1–2 concrete things that would change the picture, incl. the
   `next_report_date` when set.
