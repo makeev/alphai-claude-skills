@@ -15,7 +15,10 @@ not from a press rewrite.
 ## Steps
 
 1. **Single ticker.** Call `alphai_insider_news(ticker="<SYM>")`. If the user
-   wants only the strongest signal, raise the floor with `min_relevance=8`.
+   wants only the largest trades, raise the floor with `min_relevance=6`: it
+   keeps purchases from roughly $500k and sales from roughly $1M. A sale never
+   scores above 6, so `min_relevance=7` or higher returns purchases only, and
+   nothing at all together with `decision`.
 2. **Discretionary trades only.** Every Form 4 sale carries a label,
    `insider.decision`, read from the whole filing and not only from the 10b5-1
    checkbox:
